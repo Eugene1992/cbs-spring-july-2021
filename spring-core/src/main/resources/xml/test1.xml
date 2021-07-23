@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       xmlns:p="http://www.springframework.org/schema/p">
+    <bean id="juke" class="com.cbs.edu.springcore.xml.Juggler">
+        <constructor-arg name="name" type="java.lang.String" value="Juke"/>
+        <constructor-arg name="beanBugs" type="long" value="123"/>
+    </bean>
+
+    <bean id="sonnet29" class="com.cbs.edu.springcore.xml.Sonnet29"/>
+
+    <bean id="poeticJuke" class="com.cbs.edu.springcore.xml.PoeticJuggler">
+        <constructor-arg name="name" type="java.lang.String" value="Juke"/>
+        <constructor-arg name="beanBugs" type="long" value="123"/>
+        <constructor-arg name="poem" ref="sonnet29"/>
+    </bean>
+
+    <bean id="stage" class="com.cbs.edu.springcore.xml.Stage" factory-method="getInstance"/>
+
+    <!-- ================================================================================================================= -->
+    <!-- =  singleton       =   В каждом контейнере Spring может быть создан только один компонент (по умолчанию)        = -->
+    <!-- ================================================================================================================= -->
+    <!-- =  prototype       =   Позволяет создавать произвольное количество компонентов (по одному на каждое обращение)  = -->
+    <!-- ================================================================================================================= -->
+    <!-- =  request         =   Область действия компонента ограничивается HTTP-запросом.                                = -->
+    <!-- ================================================================================================================= -->
+    <!-- =  session         =   Область действия компонента ограничивается HTTP-сеансом.                                 = -->
+    <!-- ================================================================================================================= -->
+    <!-- =  global-session  =   Область действия компонента ограничивается глобальным HTTP-сеансом.                      = -->
+    <!-- ================================================================================================================= -->
+    <bean id="ticket" class="com.cbs.edu.springcore.xml.Ticket" scope="prototype"/>
+
+    <!--<bean id="auditorium" class="com.cbs.edu.springcore.xml.Auditorium"
+          init-method="turnOnLights"
+          destroy-method="turnOffLights"/>-->
+
+    <bean id="song" class="com.cbs.edu.springcore.xml.Song">
+        <constructor-arg value="Smells like teen spirit"/>
+    </bean>
+
+    <!--<bean id="instrumentalist" class="com.cbs.edu.springcore.xml.Instrumentalist">
+           <property name="name" value="Tom"/>
+           <property name="song" ref="song"/>
+    </bean>-->
+
+    <!--<bean id="instrumentalist" class="com.cbs.edu.springcore.xml.Instrumentalist">
+           <property name="name" value="Tom"/>
+           <property name="song">
+               <bean id="song" class="com.cbs.edu.springcore.xml.Song">
+                   <constructor-arg value="Smells like teen spirit"/>
+               </bean>
+           </property>
+    </bean>-->
+
+    <bean id="instrumentalist" class="com.cbs.edu.springcore.xml.Instrumentalist"
+          p:name="Tom"
+          p:song-ref="song"/>
+
+    <bean id="guitar" class="com.cbs.edu.springcore.xml.Guitar"/>
+    <bean id="harmonica" class="com.cbs.edu.springcore.xml.Harmonica"/>
+    <bean id="drums" class="com.cbs.edu.springcore.xml.Drums"/>
+
+    <bean id="oneManBand" class="com.cbs.edu.springcore.xml.OneManBand">
+        <property name="instruments">
+            <list>
+                <ref bean="guitar"/>
+                <ref bean="harmonica"/>
+                <ref bean="drums"/>
+<!--                <ref bean="drums"/>-->
+<!--                <ref bean="drums"/>-->
+<!--                <ref bean="drums"/>-->
+<!--                <ref bean="drums"/>-->
+<!--                <ref bean="drums"/>-->
+<!--                <ref bean="drums"/>-->
+            </list>
+        </property>
+    </bean>
+</beans>
