@@ -43,7 +43,8 @@ public class EmployeeServlet extends HttpServlet {
                 break;
 
                 case "update":
-                    // TODO: 7/24/2021 implement update
+                    Employee updatedEmployee = employees.get(id);
+                    req.setAttribute("updEmployee", updatedEmployee);
                     break;
             }
         }
@@ -54,12 +55,21 @@ public class EmployeeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
-        Integer age = Integer.valueOf(req.getParameter("age"));
-        Integer salary = Integer.valueOf(req.getParameter("salary"));
+        int age = Integer.parseInt(req.getParameter("age"));
+        int salary = Integer.parseInt(req.getParameter("salary"));
 
         int index = employees.size();
         Employee employee = new Employee(index, name, age, salary);
-        employees.add(employee);
+
+        String idValue = req.getParameter("id");
+        if (!idValue.isEmpty()) {
+            int id = Integer.parseInt(idValue);
+            employee.setId(id);
+            employees.set(id, employee);
+        } else {
+            employee.setId(employees.size());
+            employees.add(employees.size(), employee);
+        }
 
         req.setAttribute("employees", employees);
         req.getRequestDispatcher("login.jsp").forward(req, resp);
