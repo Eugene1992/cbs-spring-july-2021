@@ -11,7 +11,7 @@
         based on the recommendations of the Application Developer's Guide.
     </description>
 
-    <servlet>
+    <!--<servlet>
         <servlet-name>EmployeeServlet</servlet-name>
         <servlet-class>com.cbs.edu.servlets.controller.EmployeeServlet</servlet-class>
     </servlet>
@@ -19,5 +19,5 @@
     <servlet-mapping>
         <servlet-name>EmployeeServlet</servlet-name>
         <url-pattern>/employees</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 </web-app>

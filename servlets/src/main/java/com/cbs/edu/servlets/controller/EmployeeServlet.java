@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cbs.edu.servlets.model.Employee;
 
-public class EmployeeServlet extends HttpServlet {
+public class EmployeeServlet /*extends HttpServlet*/ {
 
     private List<Employee> employees;
 
-    @Override
+//    @Override
     public void init() throws ServletException {
         employees = new ArrayList<>();
 
@@ -30,7 +30,7 @@ public class EmployeeServlet extends HttpServlet {
         employees.add(jack.getId(), jack);
     }
 
-    @Override
+//    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String action = req.getParameter("action");
 
@@ -52,7 +52,7 @@ public class EmployeeServlet extends HttpServlet {
         req.getRequestDispatcher("login.jsp").forward(req, resp);
     }
 
-    @Override
+//    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         int age = Integer.parseInt(req.getParameter("age"));
