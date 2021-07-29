@@ -18,10 +18,10 @@ public class EmployeeDao implements GenericDAO<Employee, Integer> {
     {
         employees = new ArrayList<>();
 
-        Employee anna = new Employee(0, "Anna", 23, 15000);
-        Employee tom =  new Employee(1, "Tom", 32, 25000);
-        Employee sara = new Employee(2, "Sara", 53, 115000);
-        Employee jack = new Employee(3, "Jack", 42, 165000);
+        Employee anna = new Employee(0, "Anna", 23, 15000, "000");
+        Employee tom =  new Employee(1, "Tom", 32, 25000, "000");
+        Employee sara = new Employee(2, "Sara", 53, 115000, "000");
+        Employee jack = new Employee(3, "Jack", 42, 165000, "000");
 
         employees.add(anna.getId(), anna);
         employees.add(tom.getId(), tom);
@@ -54,5 +54,9 @@ public class EmployeeDao implements GenericDAO<Employee, Integer> {
     @Override
     public Collection<Employee> getAll() {
         return employees;
+    }
+
+    public Employee getEmployeeByEmail(String email) {
+        return email.equals("aaa@gmail.com") ? new Employee() : null;
     }
 }
