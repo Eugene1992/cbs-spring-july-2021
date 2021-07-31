@@ -14,39 +14,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cbs.edu.springbootdemo.dao.EmployeeDao;
 import com.cbs.edu.springbootdemo.model.Employee;
+import com.cbs.edu.springbootdemo.service.EmployeeService;
 
 @RestController
 @RequestMapping(value = "/employees")
 public class EmployeeController {
 
     @Autowired
-    private EmployeeDao employeeDao;
+    private EmployeeService employeeService;
 
     //    @RequestMapping(method = RequestMethod.GET)
     @GetMapping
     public Collection<Employee> getAllEmployees() {
-        return employeeDao.getAll();
+        return employeeService.getAll();
     }
 
     @GetMapping("/{id}")
     public Employee getEmployee(@PathVariable Integer id) {
-        return employeeDao.get(id);
+        return employeeService.get(id);
     }
 
     @DeleteMapping("/{id}")
     public void deleteEmployee(@PathVariable Integer id) {
-        employeeDao.delete(id);
+        employeeService.delete(id);
     }
 
     @PostMapping
     public void createEmployee(@RequestBody @Valid Employee employee) {
-        employeeDao.create(employee);
+        employeeService.create(employee);
     }
 
     @PutMapping
     public void updateEmployee(@RequestBody Employee employee) {
-        employeeDao.update(employee);
+        employeeService.update(employee);
     }
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.cbs.edu.springbootdemo.dao.EmployeeDao;
+import com.cbs.edu.springbootdemo.dao.MockEmployeeDao;
 import com.cbs.edu.springbootdemo.model.Employee;
 import com.cbs.edu.springbootdemo.model.Person;
 
@@ -14,7 +14,7 @@ import com.cbs.edu.springbootdemo.model.Person;
 public class PersonValidator implements Validator {
 
     @Autowired
-    private EmployeeDao employeeDao;
+    private MockEmployeeDao employeeDao;
 
     @Override
     public boolean supports(Class<?> clazz) {
