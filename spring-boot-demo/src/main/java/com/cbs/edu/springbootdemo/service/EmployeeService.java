@@ -2,8 +2,6 @@ package com.cbs.edu.springbootdemo.service;
 
 import java.util.Collection;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.cbs.edu.springbootdemo.dao.EmployeeDao;
@@ -41,5 +39,10 @@ public class EmployeeService implements GenericService<Employee, Integer> {
     @Override
     public Collection<Employee> getAll() {
         return employeeDao.getAll();
+    }
+
+    @Override
+    public Collection<Employee> getAllByUsername(String username, Integer page, Integer size) {
+        return null;
     }
 }

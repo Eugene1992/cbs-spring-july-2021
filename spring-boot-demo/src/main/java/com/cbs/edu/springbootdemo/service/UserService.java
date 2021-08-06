@@ -3,7 +3,9 @@ package com.cbs.edu.springbootdemo.service;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cbs.edu.springbootdemo.model.User;
 import com.cbs.edu.springbootdemo.repository.UserRepository;
@@ -43,11 +45,33 @@ public class UserService implements GenericService<User, Integer> {
         return users;
     }
 
+    @Override
+    public Collection<User> getAllByUsername(String username,
+                                             Integer page,
+                                             Integer size) {
+        return repository.findAllByUsername(username, PageRequest.of(page, size));
+    }
+
     public User getByUsername(String username) {
         return repository.findByUsername(username);
     }
 
     public User getByPassword(String password) {
         return repository.getMeUserRightNowByPasswordd(password);
+    }
+
+    @Transactional
+    public void doSomething() {
+        User firstUser = repository.findById(1).get();
+        firstUser.setPassword("XXX");
+        repository.save(firstUser);
+
+        if (true) {
+            throw new RuntimeException();
+        }
+
+        User secondUser = repository.findById(2).get();
+        secondUser.setPassword("XXX");
+        repository.save(secondUser);
     }
 }

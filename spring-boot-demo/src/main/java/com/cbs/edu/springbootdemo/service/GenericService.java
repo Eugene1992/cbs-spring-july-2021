@@ -12,4 +12,6 @@ public interface GenericService<E, ID> {
     E get(ID id);
 
     Collection<E> getAll();
+
+    Collection<E> getAllByUsername(String username, Integer page, Integer size);
 }

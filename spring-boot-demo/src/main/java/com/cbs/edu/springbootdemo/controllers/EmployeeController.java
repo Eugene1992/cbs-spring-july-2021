@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cbs.edu.springbootdemo.model.Employee;
@@ -26,8 +27,10 @@ public class EmployeeController {
 
     //    @RequestMapping(method = RequestMethod.GET)
     @GetMapping
-    public Collection<Employee> getAllEmployees() {
-        return employeeService.getAll();
+    public Collection<Employee> getAllEmployees(@RequestParam Integer page,
+                                                @RequestParam Integer size,
+                                                @RequestParam String username) {
+        return employeeService.getAllByUsername(username, page, size);
     }
 
     @GetMapping("/{id}")

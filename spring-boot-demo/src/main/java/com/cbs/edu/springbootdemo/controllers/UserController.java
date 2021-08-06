@@ -26,8 +26,10 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public Collection<User> getAllUsers() {
-        return userService.getAll();
+    public Collection<User> getAllUsers(@RequestParam Integer page,
+                                        @RequestParam Integer size,
+                                        @RequestParam String username) {
+        return userService.getAllByUsername(username, page, size);
     }
 
     @GetMapping("/{id}")
@@ -58,5 +60,10 @@ public class UserController {
     @GetMapping(value = "/searchByPassword")
     public User getByPassword(@RequestParam String password) {
         return userService.getByPassword(password);
+    }
+
+    @GetMapping(value = "/doSomething")
+    public void doSomething() {
+        userService.doSomething();
     }
 }
