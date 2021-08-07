@@ -29,7 +29,7 @@ public class User implements UserDetails {
     private Long id;
 
     @Size(min = 3, message = "No less than 3 characters")
-    private String username;
+    private String login;
 
     @Size(min = 5, message = "No less than 5 characters")
     private String password;
@@ -63,5 +63,10 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String getUsername() {
+        return login;
     }
 }

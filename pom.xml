@@ -11,7 +11,10 @@
     <modules>
         <module>spring-core</module>
         <module>servlets</module>
-        <module>we</module>
+        <module>spring-boot-demo</module>
+        <module>spring-boot-security-jsp</module>
+        <module>spring-boot-starter-bitcoin-price-checker</module>
+        <module>spring-boot-security-jwt</module>
     </modules>
 
 
