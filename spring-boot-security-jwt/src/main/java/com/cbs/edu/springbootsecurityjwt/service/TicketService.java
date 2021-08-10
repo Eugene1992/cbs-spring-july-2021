@@ -24,7 +24,6 @@ public class TicketService {
     }
 
     public Ticket createTicket(TicketCreationRequest creationRequest) {
-
         Ticket newTicket = new Ticket();
 
         newTicket.setTitle(creationRequest.getTitle());

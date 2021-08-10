@@ -1,7 +1,6 @@
 package com.cbs.edu.springbootsecurityjwt.controller.request;
 
 import com.cbs.edu.springbootsecurityjwt.model.Priority;
-import com.cbs.edu.springbootsecurityjwt.model.Status;
 import lombok.Data;
 
 @Data
