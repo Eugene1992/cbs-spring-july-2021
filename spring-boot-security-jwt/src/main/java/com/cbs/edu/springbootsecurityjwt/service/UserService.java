@@ -2,7 +2,6 @@ package com.cbs.edu.springbootsecurityjwt.service;
 
 import java.util.Collections;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,28 +12,27 @@ import com.cbs.edu.springbootsecurityjwt.model.Role;
 import com.cbs.edu.springbootsecurityjwt.model.User;
 import com.cbs.edu.springbootsecurityjwt.repository.RoleRepository;
 import com.cbs.edu.springbootsecurityjwt.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userEntityRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private RoleRepository roleEntityRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public User getById(Integer id) {
+        return userRepository.findById(id).get();
+    }
 
     public User saveUser(User userEntity) {
-        Role userRole = roleEntityRepository.findByName("ROLE_USER");
-        userEntity.setRoles(Collections.singleton(userRole));
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-        return userEntityRepository.save(userEntity);
+        return userRepository.save(userEntity);
     }
 
     public User findByLogin(String username) {
-        return userEntityRepository.findByUsername(username);
+        return userRepository.findByUsername(username);
     }
 
     public User findByLoginAndPassword(String login, String password) {
@@ -49,6 +47,6 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userEntityRepository.findByUsername(username);
+        return userRepository.findByUsername(username);
     }
 }

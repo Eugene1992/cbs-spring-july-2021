@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
@@ -15,18 +16,29 @@ import javax.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Builder
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "cbs_users")
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
+
+    private String firstName;
+
+    private String lastName;
 
     @Size(min = 3, message = "No less than 3 characters")
     private String username;
@@ -39,6 +51,14 @@ public class User implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "assignee")
+    private Set<Ticket> assignedTickets;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "reporter")
+    private Set<Ticket> reportedTickets;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
