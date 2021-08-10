@@ -15,6 +15,7 @@
         <module>spring-boot-security-jsp</module>
         <module>spring-boot-starter-bitcoin-price-checker</module>
         <module>spring-boot-security-jwt</module>
+        <module>frontend</module>
     </modules>
 
 
