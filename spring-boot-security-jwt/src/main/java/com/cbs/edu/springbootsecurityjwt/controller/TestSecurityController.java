@@ -20,10 +20,12 @@ public class TestSecurityController {
         return "Hi user";
     }
 
-//    @Secured("ROLE_VIEWER")
-//    @RolesAllowed("ROLE_VIEWER")
-    @GetMapping("/admin/get/preAuthorize")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @Secured("ROLE_ADMIN")
+//    @RolesAllowed("ROLE_ADMIN")
+
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+
+    @GetMapping("/preAuthorize")
     public String testPreAuthorize() {
         return "Hi admin";
     }
