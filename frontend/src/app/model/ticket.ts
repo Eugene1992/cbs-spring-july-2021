@@ -1,7 +1,9 @@
 import {User} from "./user";
+import {Component} from "./component";
+import {Label} from "./label";
 
-export interface Task {
-  id: number;
+export interface Ticket {
+  id: string;
   key: string;
   title: string;
   description: string;
@@ -10,6 +12,9 @@ export interface Task {
   type: TicketType;
   assignee: User;
   reporter: User;
+  components: Component[];
+  labels: Label[];
+  watchers: User[];
 }
 
 export enum Priority {

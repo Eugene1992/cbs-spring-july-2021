@@ -24,7 +24,12 @@ public class TicketController {
 
     @GetMapping("/{id}")
     public TicketDto getTicket(@PathVariable Integer id) {
-        return ticketService.getTicket(id);
+        return ticketService.getTicketDto(id);
+    }
+
+    @GetMapping("/{id}/watchers/count")
+    public Integer getTicketWatchersCount(@PathVariable Integer id) {
+        return ticketService.getTicketWatchersCount(id);
     }
 
     @PostMapping

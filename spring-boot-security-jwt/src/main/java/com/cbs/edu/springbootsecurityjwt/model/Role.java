@@ -20,11 +20,7 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @Table(name = "cbs_roles")
-public class Role implements GrantedAuthority {
-
-    @Id
-    @GeneratedValue
-    private Long id;
+public class Role extends AbstractEntity implements GrantedAuthority {
 
     private String name;
 

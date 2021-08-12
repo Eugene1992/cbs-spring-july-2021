@@ -5,14 +5,6 @@ import jwtDecode from 'jwt-decode';
 import Token from "../model/token";
 import {Router} from "@angular/router";
 
-export class JwtResponse {
-  constructor(
-    public jwttoken: string,
-  ) {
-  }
-
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -37,6 +29,7 @@ export class AuthenticationService {
           let decodedToken: Token = jwtDecode<Token>(token);
           let role = decodedToken.roles[0].name;
           sessionStorage.setItem('role', role);
+          sessionStorage.setItem('userId', decodedToken.userId);
 
           this.isUser = role === "ROLE_USER";
           this.isAdmin = role === "ROLE_ADMIN";
@@ -68,5 +61,10 @@ export class AuthenticationService {
     sessionStorage.removeItem('username')
     sessionStorage.removeItem('token')
     sessionStorage.removeItem('role')
+    sessionStorage.removeItem('userId')
+  }
+
+  getCurrentUserId(): string {
+    return sessionStorage.getItem('userId') || "";
   }
 }

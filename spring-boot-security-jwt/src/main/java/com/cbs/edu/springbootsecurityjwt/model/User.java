@@ -30,11 +30,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "cbs_users")
-public class User implements UserDetails {
-
-    @Id
-    @GeneratedValue
-    private Integer id;
+public class User extends AbstractEntity implements UserDetails {
 
     private String firstName;
 

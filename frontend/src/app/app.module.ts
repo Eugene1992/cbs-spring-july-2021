@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule }   from '@angular/forms';
 import {AdminGuard} from "./guards/admin.guard";
+import { NotificationBarComponent } from './header/notification-bar/notification-bar.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -26,7 +27,8 @@ const appRoutes: Routes = [
     HeaderComponent,
     SearchComponent,
     TaskComponent,
-    LoginComponent
+    LoginComponent,
+    NotificationBarComponent
   ],
   imports: [
     BrowserModule,

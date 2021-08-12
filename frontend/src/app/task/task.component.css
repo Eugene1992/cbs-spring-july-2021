@@ -91,3 +91,13 @@
   position: absolute;
   right: 0;
 }
+
+.label, .component {
+  margin-right: 5px;
+}
+
+.start-watching-function {
+  color: #0d6efd !important;
+  text-decoration: underline !important;
+  cursor: pointer !important;
+}

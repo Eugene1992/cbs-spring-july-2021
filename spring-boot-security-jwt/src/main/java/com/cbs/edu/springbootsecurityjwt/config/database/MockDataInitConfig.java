@@ -9,12 +9,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.cbs.edu.springbootsecurityjwt.model.Component;
+import com.cbs.edu.springbootsecurityjwt.model.Label;
 import com.cbs.edu.springbootsecurityjwt.model.Priority;
 import com.cbs.edu.springbootsecurityjwt.model.Role;
 import com.cbs.edu.springbootsecurityjwt.model.Status;
 import com.cbs.edu.springbootsecurityjwt.model.Ticket;
 import com.cbs.edu.springbootsecurityjwt.model.TicketType;
 import com.cbs.edu.springbootsecurityjwt.model.User;
+import com.cbs.edu.springbootsecurityjwt.repository.ComponentRepository;
+import com.cbs.edu.springbootsecurityjwt.repository.LabelRepository;
 import com.cbs.edu.springbootsecurityjwt.repository.RoleRepository;
 import com.cbs.edu.springbootsecurityjwt.repository.TicketRepository;
 import com.cbs.edu.springbootsecurityjwt.service.UserService;
@@ -25,7 +29,9 @@ public class MockDataInitConfig {
     @Bean
     public CommandLineRunner loadData(RoleRepository roleRepository,
                                       TicketRepository ticketRepository,
-                                      UserService userService) {
+                                      UserService userService,
+                                      LabelRepository labelRepository,
+                                      ComponentRepository componentRepository) {
         return (args) -> {
             final Role roleAdmin = roleRepository.save(new Role("ROLE_ADMIN"));
             final Role roleUser = roleRepository.save(new Role("ROLE_USER"));
@@ -50,6 +56,15 @@ public class MockDataInitConfig {
                             .build()
             );
 
+            Label buildDefectLabel = labelRepository.save(Label.builder().name("build_defect").build());
+            Label phaseOneLabel = labelRepository.save(Label.builder().name("phase_1").build());
+            Label gapLabel = labelRepository.save(Label.builder().name("gap").build());
+
+
+            Component ramComponent = componentRepository.save(Component.builder().name("RAM").build());
+            Component securityComponent = componentRepository.save(Component.builder().name("Security").build());
+            Component svtComponent = componentRepository.save(Component.builder().name("SVT").build());
+
             ticketRepository.save(
                     Ticket.builder()
                             .title("Implement RAM service")
@@ -66,6 +81,8 @@ public class MockDataInitConfig {
                             .assignee(johnUser)
                             .status(Status.OPEN)
                             .type(TicketType.STORY)
+                            .labels(asList(buildDefectLabel, phaseOneLabel, gapLabel))
+                            .components(asList(ramComponent, securityComponent, svtComponent))
                             .build()
             );
         };

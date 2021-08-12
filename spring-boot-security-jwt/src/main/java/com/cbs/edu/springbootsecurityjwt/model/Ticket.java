@@ -1,5 +1,7 @@
 package com.cbs.edu.springbootsecurityjwt.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +9,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,11 +27,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "cbs_tickets")
-public class Ticket {
-
-    @Id
-    @GeneratedValue
-    private Integer id;
+public class Ticket extends AbstractEntity {
 
     private String key;
 
@@ -54,4 +54,22 @@ public class Ticket {
 
     @Enumerated(EnumType.ORDINAL)
     private TicketType type;
+
+    @ManyToMany
+    @JoinTable(name = "tickets_components",
+            joinColumns = { @JoinColumn(name = "component_id")},
+            inverseJoinColumns = { @JoinColumn(name = "ticket_id")})
+    private List<Component> components;
+
+    @ManyToMany
+    @JoinTable(name = "tickets_labels",
+            joinColumns = { @JoinColumn(name = "label_id")},
+            inverseJoinColumns = { @JoinColumn(name = "ticket_id")})
+    private List<Label> labels;
+
+    @ManyToMany
+    @JoinTable(name = "tickets_watchers",
+            joinColumns = { @JoinColumn(name = "watcher_id")},
+            inverseJoinColumns = { @JoinColumn(name = "ticket_id")})
+    private List<User> watchers;
 }

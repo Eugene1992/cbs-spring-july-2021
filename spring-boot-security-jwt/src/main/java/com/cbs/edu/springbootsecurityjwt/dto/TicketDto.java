@@ -2,7 +2,18 @@ package com.cbs.edu.springbootsecurityjwt.dto;
 
 import static java.util.Objects.nonNull;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+import org.springframework.util.CollectionUtils;
+
 import com.cbs.edu.springbootsecurityjwt.dto.mappers.EntityDtoMapper;
+import com.cbs.edu.springbootsecurityjwt.model.Component;
+import com.cbs.edu.springbootsecurityjwt.model.Label;
 import com.cbs.edu.springbootsecurityjwt.model.Priority;
 import com.cbs.edu.springbootsecurityjwt.model.Status;
 import com.cbs.edu.springbootsecurityjwt.model.Ticket;
@@ -28,6 +39,9 @@ public class TicketDto implements EntityDtoMapper<Ticket, TicketDto> {
     private Priority priority;
     private Status status;
     private TicketType type;
+    private List<ComponentDto> components;
+    private List<LabelDto> labels;
+    private List<UserDto> watchers;
 
     @Override
     public TicketDto map(Ticket ticket) {
@@ -49,6 +63,27 @@ public class TicketDto implements EntityDtoMapper<Ticket, TicketDto> {
         User reporter = ticket.getReporter();
         if (nonNull(reporter)) {
             builder.reporter(new UserDto().map(reporter));
+        }
+
+        List<Component> components = ticket.getComponents();
+        if (!CollectionUtils.isEmpty(components)) {
+            builder.components(components.stream()
+                    .map(component -> new ComponentDto().map(component))
+                    .collect(Collectors.toList()));
+        }
+
+        List<Label> labels = ticket.getLabels();
+        if (!CollectionUtils.isEmpty(labels)) {
+            builder.labels(labels.stream()
+                    .map(label -> new LabelDto().map(label))
+                    .collect(Collectors.toList()));
+        }
+
+        List<User> watchers = ticket.getWatchers();
+        if (!CollectionUtils.isEmpty(watchers)) {
+            builder.watchers(watchers.stream()
+                    .map(user -> new UserDto().map(user))
+                    .collect(Collectors.toList()));
         }
 
         return builder.build();
