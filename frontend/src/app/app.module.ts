@@ -4,7 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {SearchComponent} from './search/search.component';
-import {TaskComponent} from './task/task.component';
+import {TaskComponent} from './task/profile/task.component';
 import {RouterModule, Routes} from "@angular/router";
 import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
@@ -12,12 +12,14 @@ import {BasicAuthHtppInterceptorService} from "./service/basic-auth-htpp-interce
 import { LoginComponent } from './login/login.component';
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule }   from '@angular/forms';
-import {AdminGuard} from "./guards/admin.guard";
 import { NotificationBarComponent } from './header/notification-bar/notification-bar.component';
+import { TaskCreationComponent } from './task/create/task-creation/task-creation.component';
+import { ToastrModule } from 'ngx-toastr';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'task/:id', component: TaskComponent, canActivate: [AdminGuard]},
+  {path: 'task/:id', component: TaskComponent},
   {path: 'search', component: SearchComponent}
 ];
 
@@ -28,7 +30,8 @@ const appRoutes: Routes = [
     SearchComponent,
     TaskComponent,
     LoginComponent,
-    NotificationBarComponent
+    NotificationBarComponent,
+    TaskCreationComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,9 @@ const appRoutes: Routes = [
     HttpClientModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [
     {

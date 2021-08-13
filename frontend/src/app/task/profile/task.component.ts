@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
-import {TicketService} from "../service/ticket.service";
-import {Ticket} from "../model/ticket";
-import {AuthenticationService} from "../service/authentication.service";
-import {UserService} from "../service/user.service";
+import {TicketService} from "../../service/ticket.service";
+import {Task} from "../../model/task";
+import {AuthenticationService} from "../../service/authentication.service";
+import {UserService} from "../../service/user.service";
 
 @Component({
   selector: 'app-task',
@@ -14,7 +14,7 @@ import {UserService} from "../service/user.service";
 export class TaskComponent implements OnInit {
 
   private taskId: any;
-  public task!: Ticket;
+  public task: Task = {};
   public isCurrentUserWatcher: boolean = false;
   public watchersCount: number = 0;
   public currentUserId!: string;
@@ -29,7 +29,7 @@ export class TaskComponent implements OnInit {
     this.currentUserId = this.authService.getCurrentUserId();
     this.route.params.subscribe(params => {
       this.taskId = params['id'];
-      this.taskService.getTask(this.taskId).subscribe((task: Ticket) => {
+      this.taskService.getTask(this.taskId).subscribe((task: Task) => {
         this.task = task;
         if (task.watchers) {
           this.watchersCount = task.watchers.length;
@@ -41,7 +41,7 @@ export class TaskComponent implements OnInit {
 
 
   watchTicket() {
-    this.userService.watchTicket(this.currentUserId, this.task.id).subscribe(() => {
+    this.userService.watchTicket(this.currentUserId, this.task.id!).subscribe(() => {
       this.isCurrentUserWatcher = true;
       this.taskService.getTicketWatchersCount(this.taskId).subscribe((watchersCount: number) => {
         this.watchersCount = watchersCount;
@@ -50,7 +50,7 @@ export class TaskComponent implements OnInit {
   }
 
   stopWatchTicket() {
-    this.userService.stopWatchTicket(this.currentUserId, this.task.id).subscribe(() => {
+    this.userService.stopWatchTicket(this.currentUserId, this.task.id!).subscribe(() => {
       this.isCurrentUserWatcher = false;
       this.taskService.getTicketWatchersCount(this.taskId).subscribe((watchersCount: number) => {
         this.watchersCount = watchersCount;

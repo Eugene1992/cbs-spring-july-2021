@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Ticket} from "../model/ticket";
+import {Task} from "../model/task";
+import {TaskCreationRequest} from "../model/task-creation-request";
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,12 @@ export class TicketService {
   constructor(private http: HttpClient) {
   }
 
-  getTask(id: number): Observable<Ticket> {
-    return this.http.get<Ticket>(`${this.baseUrl}/tickets/${id}`);
+  getTask(id: number): Observable<Task> {
+    return this.http.get<Task>(`${this.baseUrl}/tickets/${id}`);
+  }
+
+  createTask(task: TaskCreationRequest): Observable<Task> {
+    return this.http.post<Task>(`${this.baseUrl}/tickets`, task);
   }
 
   getTicketWatchersCount(id: number): Observable<number> {

@@ -51,16 +51,16 @@
                     <tbody>
                     <tr>
                       <td class="td-no-bottom-padding">Type:</td>
-                      <td class="td-no-bottom-padding"><img src="assets/ticket-type-icons/story_icon.png"
+                      <td class="td-no-bottom-padding"><img src="../../../assets/ticket-type-icons/story_icon.png"
                                                             alt=""> {{task.type}}</td>
                     </tr>
                     <tr>
                       <td class="td-no-bottom-padding">Priority:</td>
-                      <td class="td-no-bottom-padding"><img src="assets/ticket-priority-icons/normal_icon.png"
+                      <td class="td-no-bottom-padding"><img src="../../../assets/ticket-priority-icons/normal_icon.png"
                                                             alt=""> {{task.priority}}</td>
                     </tr>
                     <tr>
-                      <td class="td-no-bottom-padding">Component/s:</td>
+                      <td class="td-no-bottom-padding">Components/s:</td>
                       <td class="td-no-bottom-padding">
                         <span class="component">
                           <span *ngFor="let component of task.components; let isLast = last">
@@ -131,7 +131,7 @@
                 <div class="tab-pane fade show active" id="comments" role="tabpanel" aria-labelledby="comments-tab">
                   <div class="comment-box">
                     <div class="comment-title">
-                      <img class="user-icon margin-right-5" src="assets/user-icons/user_icon.png" alt="">
+                      <img class="user-icon margin-right-5" src="../../../assets/user-icons/user_icon.png" alt="">
                       <a href="">Yevhenii Deineka</a> added a comment - Yesterday
                       <a href="#" class="comment-function"><i
                         class="fas fas fa-ellipsis-h float-right comment-function"></i></a>
@@ -143,7 +143,7 @@
                   </div>
                   <div class="comment-box">
                     <div class="comment-title">
-                      <img class="user-icon margin-right-5" src="assets/user-icons/user_icon.png" alt="">
+                      <img class="user-icon margin-right-5" src="../../../assets/user-icons/user_icon.png" alt="">
                       <a href="">Yevhenii Deineka</a> added a comment - 2 days ago
                       <a href="#" class="comment-function"><i class="fas fa-link float-right comment-function"></i></a>
                       <a href="#" class="comment-function"><i class="far fa-edit float-right comment-function"></i></a>
@@ -170,16 +170,16 @@
                     <tbody>
                     <tr>
                       <td class="td-no-bottom-padding">Assignee:</td>
-                      <td class="td-no-bottom-padding"><img class="user-icon" src="assets/user-icons/user_icon.png"
+                      <td class="td-no-bottom-padding"><img class="user-icon" src="../../../assets/user-icons/user_icon.png"
                                                             alt="">
-                        {{task.assignee.firstName}} {{task.assignee.lastName}}
+                        <span *ngIf="task.assignee">{{task.assignee!.firstName}} {{task.assignee!.lastName}}</span>
                       </td>
                     </tr>
                     <tr>
                       <td class="td-no-bottom-padding">Reporter:</td>
-                      <td class="td-no-bottom-padding"><img class="user-icon" src="assets/user-icons/user_icon.png"
+                      <td class="td-no-bottom-padding"><img class="user-icon" src="../../../assets/user-icons/user_icon.png"
                                                             alt="">
-                        {{task.reporter.firstName}} {{task.reporter.lastName}}
+                        {{task.reporter!.firstName}} {{task.reporter!.lastName}}
                       </td>
                     </tr>
                     <tr>
