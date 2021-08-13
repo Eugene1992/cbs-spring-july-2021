@@ -93,4 +93,8 @@ public class UserService implements UserDetailsService {
             ticketService.updateTicket(ticket);
         }
     }
+
+    public Iterable<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 }
