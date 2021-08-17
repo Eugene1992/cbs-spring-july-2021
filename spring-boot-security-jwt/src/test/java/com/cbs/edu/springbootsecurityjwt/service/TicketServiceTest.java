@@ -1,6 +1,9 @@
 package com.cbs.edu.springbootsecurityjwt.service;
 
+import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -34,6 +37,15 @@ class TicketServiceTest {
     @Mock
     private UserService userService;
 
+    @Mock
+    private ComponentService componentService;
+
+    @Mock
+    private LabelService labelService;
+
+    @Mock
+    private WsNotificationService notificationService;
+
     @Captor
     private ArgumentCaptor<Ticket> ticketArgumentCaptor;
 
@@ -58,6 +70,8 @@ class TicketServiceTest {
         mockReporter.setLastName("Deineka");
 
         when(userService.getById(reporterId)).thenReturn(mockReporter);
+        when(componentService.getComponentByIds(creationRequest.getComponents())).thenReturn(emptyList());
+        when(labelService.getLabelByIds(creationRequest.getLabels())).thenReturn(emptyList());
 
         ticketService.createTicket(creationRequest);
 
