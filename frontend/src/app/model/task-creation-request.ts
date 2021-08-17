@@ -6,6 +6,8 @@ export interface TaskCreationRequest {
   id?: string;
   key?: string;
   title?: string;
+  status?: string;
+  dueDate?: string;
   description?: string;
   priority?: Priority;
   type?: TicketType;

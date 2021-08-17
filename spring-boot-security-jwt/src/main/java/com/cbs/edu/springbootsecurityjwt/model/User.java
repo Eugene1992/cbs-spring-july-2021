@@ -56,6 +56,10 @@ public class User extends AbstractEntity implements UserDetails {
     @OneToMany(mappedBy = "reporter")
     private Set<Ticket> reportedTickets;
 
+    public User(Integer id) {
+        super(id);
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;

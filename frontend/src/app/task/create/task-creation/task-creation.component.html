@@ -31,9 +31,13 @@
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-3">
               <label class="fw-500" for="estimate">Original estimate</label>
-              <input [(ngModel)]="task.estimate" name="estimate" type="number" class="form-control" id="estimate">
+              <input [(ngModel)]="task.estimate" min="1" name="estimate" type="number" class="form-control" id="estimate">
+            </div>
+            <div class="form-group col-md-3">
+              <label class="fw-500" for="dueDate">Due date</label>
+              <input [(ngModel)]="task.dueDate" name="dueDate" type="date" class="form-control" id="dueDate">
             </div>
             <div class="form-group col-md-6">
               <label class="fw-500" for="assignee">Assignee</label>

@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import com.cbs.edu.springbootsecurityjwt.model.Component;
 import com.cbs.edu.springbootsecurityjwt.model.Label;
 import com.cbs.edu.springbootsecurityjwt.model.Priority;
+import com.cbs.edu.springbootsecurityjwt.model.Project;
 import com.cbs.edu.springbootsecurityjwt.model.Role;
 import com.cbs.edu.springbootsecurityjwt.model.Status;
 import com.cbs.edu.springbootsecurityjwt.model.Ticket;
@@ -19,6 +20,7 @@ import com.cbs.edu.springbootsecurityjwt.model.TicketType;
 import com.cbs.edu.springbootsecurityjwt.model.User;
 import com.cbs.edu.springbootsecurityjwt.repository.ComponentRepository;
 import com.cbs.edu.springbootsecurityjwt.repository.LabelRepository;
+import com.cbs.edu.springbootsecurityjwt.repository.ProjectRepository;
 import com.cbs.edu.springbootsecurityjwt.repository.RoleRepository;
 import com.cbs.edu.springbootsecurityjwt.repository.TicketRepository;
 import com.cbs.edu.springbootsecurityjwt.service.UserService;
@@ -29,12 +31,21 @@ public class MockDataInitConfig {
     @Bean
     public CommandLineRunner loadData(RoleRepository roleRepository,
                                       TicketRepository ticketRepository,
+                                      ProjectRepository projectRepository,
                                       UserService userService,
                                       LabelRepository labelRepository,
                                       ComponentRepository componentRepository) {
         return (args) -> {
             final Role roleAdmin = roleRepository.save(new Role("ROLE_ADMIN"));
             final Role roleUser = roleRepository.save(new Role("ROLE_USER"));
+
+            final Project atpProject = new Project();
+            atpProject.setName("ATP");
+            final Project stgProject = new Project();
+            stgProject.setName("STG");
+
+            final Project savedAtpProject = projectRepository.save(atpProject);
+            final Project savedSTGProject = projectRepository.save(stgProject);
 
             final User yevheniiUser = userService.saveUser(
                     User.builder()
@@ -78,6 +89,7 @@ public class MockDataInitConfig {
                             .key("IJC-1")
                             .priority(Priority.MAJOR)
                             .reporter(yevheniiUser)
+                            .project(savedAtpProject)
                             .assignee(johnUser)
                             .status(Status.OPEN)
                             .type(TicketType.STORY)

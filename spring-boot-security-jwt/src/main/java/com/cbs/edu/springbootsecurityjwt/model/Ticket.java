@@ -40,6 +40,10 @@ public class Ticket extends AbstractEntity {
     private String description;
 
     @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
+
+    @ManyToOne
     @JoinColumn(name = "assignee_id")
     private User assignee;
 

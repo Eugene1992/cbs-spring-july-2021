@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cbs.edu.springbootsecurityjwt.controller.request.TicketCreationRequest;
+import com.cbs.edu.springbootsecurityjwt.controller.request.TicketSearchRequest;
 import com.cbs.edu.springbootsecurityjwt.dto.TicketDto;
 import com.cbs.edu.springbootsecurityjwt.model.Ticket;
 import com.cbs.edu.springbootsecurityjwt.service.TicketService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/tickets")
+@RequestMapping("/api/tickets")
 @RequiredArgsConstructor
 @CrossOrigin
 public class TicketController {
@@ -35,5 +36,10 @@ public class TicketController {
     @PostMapping
     public Ticket createTicket(@RequestBody TicketCreationRequest creationRequest) {
         return ticketService.createTicket(creationRequest);
+    }
+
+    @PostMapping("/search")
+    public Iterable<Ticket> searchTickets(@RequestBody TicketSearchRequest searchRequest) {
+        return ticketService.searchTickets(searchRequest);
     }
 }

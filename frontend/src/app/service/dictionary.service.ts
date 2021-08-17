@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Priority, Task, TicketType} from "../model/task";
+import {Priority, Status, Task, TicketType} from "../model/task";
 import {Label} from "../model/label";
+import {Stats} from "fs";
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,9 @@ export class DictionaryService {
 
   getAllPriorities(): Observable<Priority[]> {
     return this.http.get<Priority[]>(`${this.baseUrl}/dictionaries/priority`);
+  }
+
+  getAllStatuses(): Observable<Status[]> {
+    return this.http.get<Status[]>(`${this.baseUrl}/dictionaries/status`);
   }
 }

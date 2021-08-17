@@ -3,13 +3,14 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Task} from "../model/task";
 import {TaskCreationRequest} from "../model/task-creation-request";
+import {TaskSearchRequest} from "../model/task-search-request";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketService {
 
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) {
   }
@@ -24,5 +25,9 @@ export class TicketService {
 
   getTicketWatchersCount(id: number): Observable<number> {
     return this.http.get<number>(`${this.baseUrl}/tickets/${id}/watchers/count`);
+  }
+
+  searchTickets(request: TaskSearchRequest): Observable<Task[]> {
+    return this.http.post<Task[]>(`${this.baseUrl}/tickets/search`, request);
   }
 }
