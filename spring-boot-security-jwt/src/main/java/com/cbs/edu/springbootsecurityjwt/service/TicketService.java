@@ -2,24 +2,17 @@ package com.cbs.edu.springbootsecurityjwt.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
 import org.springframework.context.annotation.Lazy;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.cbs.edu.springbootsecurityjwt.controller.request.TicketCreationRequest;
 import com.cbs.edu.springbootsecurityjwt.controller.request.TicketSearchRequest;
 import com.cbs.edu.springbootsecurityjwt.dto.TicketDto;
-import com.cbs.edu.springbootsecurityjwt.model.AbstractEntity;
 import com.cbs.edu.springbootsecurityjwt.model.Component;
 import com.cbs.edu.springbootsecurityjwt.model.Label;
 import com.cbs.edu.springbootsecurityjwt.model.Priority;
@@ -84,7 +77,7 @@ public class TicketService {
 
         Ticket savedTicket = repository.save(newTicket);
 
-        notificationService.notifyUser(savedTicket.getAssignee().getId().toString(), "New ticket has been created for you!");
+//        notificationService.notifyUser(savedTicket.getAssignee().getId().toString(), "New ticket has been created for you!");
 
         return savedTicket;
     }
@@ -95,7 +88,7 @@ public class TicketService {
 
     @SuppressWarnings("unchecked")
     public Iterable<Ticket> searchTickets(TicketSearchRequest searchRequest) {
-        return repository.findAll((root, criteriaQuery, criteriaBuilder) -> {
+        return repository.findAll((Specification) (root, criteriaQuery, criteriaBuilder) -> {
             final Path<User> assigneePath = root.get("assignee");
             final Path<User> reporterPath = root.get("reporter");
             final Path<Project> projectPath = root.get("project");

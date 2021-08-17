@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.CrudRepository;
 
 import com.cbs.edu.springbootsecurityjwt.model.Ticket;
-import com.cbs.edu.springbootsecurityjwt.model.User;
 
 public interface TicketRepository extends CrudRepository<Ticket, Integer>, JpaSpecificationExecutor {
 }

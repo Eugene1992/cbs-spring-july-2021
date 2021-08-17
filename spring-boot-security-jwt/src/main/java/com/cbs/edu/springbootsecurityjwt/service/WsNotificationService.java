@@ -11,7 +11,6 @@ public class WsNotificationService {
     @Autowired
     private SimpMessagingTemplate template;
 
-    @Async
     public void notifyUser(String userId, String msg) {
         try {
             Thread.sleep(5000);

@@ -15,8 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.cbs.edu.springbootsecurityjwt.service.ticketstate.OpenTicketState;
-import com.cbs.edu.springbootsecurityjwt.service.ticketstate.TicketStatusState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
